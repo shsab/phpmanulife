@@ -1,0 +1,40 @@
+	<div data-ng-controller="safeCtrl">
+		<div class="chart">
+			<bar-chart height="options.height" data="displayedCollection"></bar-chart>
+		</div>
+		<table st-set-filter="customFilter" st-table="displayedCollection" st-safe-src="saferowCollection"  class="table table-striped">
+			<thead>
+			<tr>
+				<th st-sort="svs_date">date</th>
+				<th st-sort="svs_url">URL</th>
+				<th st-sort="svs_visits"># of visits per day</th>
+			</tr>
+			<tr>
+				<th>
+					<st-date-range predicate="svs_date" before="query.before" after="query.after"></st-date-range>
+					<!--<input st-search="svs_date" placeholder="search for date" class="input-sm form-control" type="search"/>-->
+				</th>
+				<th>
+					<input st-search="svs_url" placeholder="search for URL" class="input-sm form-control" type="search"/>
+				</th>
+				<th>
+					<input st-search="svs_visits" placeholder="search for # visits" class="input-sm form-control" type="search"/>
+				</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr ng-repeat="row in displayedCollection">
+				<td>{{row.svs_date  | date}}</td>
+				<td>{{row.svs_url}}</td>
+				<td>{{row.svs_visits | number}}</td>
+			</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="5" class="text-center">
+						<div st-pagination="" st-items-by-page="10" st-displayed-pages="7"></div>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
